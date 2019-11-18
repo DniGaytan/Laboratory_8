@@ -135,6 +135,8 @@ app.put('/blog-posts/:id', jsonP, function(req, res){
 
 });
 
+let server;
+
 function runServer(port, databaseUrl){
 	return new Promise( (resolve, reject ) => {
 		mongoose.connect(databaseUrl, response => {
