@@ -1,6 +1,8 @@
 let mongoose = require('mongoose')
 let uuid = require('uuid/v4');
 
+mongoose.Promise = global.Promise;
+
 var blogSchema = mongoose.Schema(
   {
     id : {
@@ -20,7 +22,7 @@ var blogSchema = mongoose.Schema(
     },
   });
 
-let blogHandler = mopngoose.model( 'blogHandler', blogSchema);
+let blogHandler = mongoose.model( 'blogHandler', blogSchema);
 
 var blogFunctionalities = {
 
