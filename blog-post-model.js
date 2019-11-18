@@ -30,6 +30,10 @@ var blogFunctionalities = {
     return blogHandler.find().then((posts) => {return posts}).catch((e) => {throw Error(e)});
   },
 
+  getId : (id) => {
+    return blogHandler.find({id : id}).then((posts) => {return posts}).catch((e) => {throw Error(e)});
+  },
+
   getByAuthor : (authorName) => {
     return blogHandler.find({author : authorName}).then((post) => {return post}).catch((e) => {throw Error(e)});
   },

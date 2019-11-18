@@ -89,11 +89,14 @@ $("#button-update").on("click", function(event){
 
     for(var i = 0 ; i < options.length; i++){
       if(options[i].selected){
+        var title = $("#update-title").val();
+        var content = $("#update-content").val();
+        var author = $("#update-author").val();
         var sendingPost = {
           id : options[i].className,
-          title : $("#update-title").val(),
-          content : $("#update-content").val(),
-          author : $("#update-author").val(),
+          title : title,
+          content : content,
+          author : author,
         }
         console.log(options[i].className);
         settings = {
@@ -192,10 +195,12 @@ function restartMain(blogs){
     var titleH4 = document.createElement("h4");
     var contentP = document.createElement("p");
     var authorP = document.createElement("p");
+    var publishedDate = document.createElement("p");
     $(titleH4).text(blogs[i].title);
     $(contentP).text(blogs[i].content);
     $(authorP).text(blogs[i].author);
-    $(newDiv).append(titleH4, contentP, authorP);
+    $(publishedDate).text(blog.publishDate);
+    $(newDiv).append(titleH4, contentP, authorP, publishedDate);
     $(newDiv).addClass("blog-entry justify-content-center");
     $(newDiv).attr('id', blogs[i].id);
     $("#blogs-wrap").append(newDiv);
@@ -208,10 +213,12 @@ function updateMain(blog){
     var titleH4 = document.createElement("h4");
     var contentP = document.createElement("p");
     var authorP = document.createElement("p");
+    var publishedDate = document.createElement("p");
     $(titleH4).text(blog.title);
     $(contentP).text(blog.content);
     $(authorP).text(blog.author);
-    $(newDiv).append(titleH4, contentP, authorP);
+    $(publishedDate).text(blog.publishDate);
+    $(newDiv).append(titleH4, contentP, authorP, publishedDate);
     $(newDiv).addClass("blog-entry justify-content-center");
     $(newDiv).attr('id', blog.id);
     $("#blogs-wrap").append(newDiv);

@@ -74,7 +74,7 @@ app.post('/blog-posts', jsonP, function(req, res, next){
       title : req.body.title,
       content: req.body.content,
       author: req.body.author,
-      publishDate: Date.now(),
+      publishDate: new Date(),
     }
 
     blogFunctionalities.post(newPost)
@@ -113,15 +113,34 @@ app.delete('/blog-posts/:id', function(req, res){
 app.put('/blog-posts/:id', jsonP, function(req, res){
   if(req.body.id != ''){
     if (req.params.id == req.body.id) {
-          blogFunctionalities.put(req.body)
-          .then((post) => {
-            return res.status(202).json(post);
-          })
-          .catch( (e) => {
-            res.statusMessage = "Cannot connect properly with the DB";
-            return res.status(500).json({
-              status : 500,
-              message : res.statusMessage,
+          blogFunctionalities.getId(req.body.id).then((currentBlog) => {
+            console.log(currentBlog)
+
+            if(req.body.title == ""){
+              req.body.title = currentBlog[0].title;
+            }
+            if(req.body.content == ""){
+              req.body.content = currentBlog[0].content;
+            }
+            if(req.body.author == ""){
+              req.body.author = currentBlog[0].author;
+            }
+            if(req.body.publishDate == ""){
+              req.body.author = currentBlog[0].publishDate;
+            }
+
+            console.log(req.body);
+
+            blogFunctionalities.put(req.body)
+            .then((post) => {
+              return res.status(202).json(post);
+            })
+            .catch( (e) => {
+              res.statusMessage = "Cannot connect properly with the DB";
+              return res.status(500).json({
+                status : 500,
+                message : res.statusMessage,
+              });
             });
           });
     }
