@@ -13,10 +13,12 @@ $(document).ready(function(){
         var titleH4 = document.createElement("h4");
         var contentP = document.createElement("p");
         var authorP = document.createElement("p");
+        var publishedDate = document.createElement("p");
         $(titleH4).text(response[i].title);
         $(contentP).text(response[i].content);
         $(authorP).text(response[i].author);
-        $(newDiv).append(titleH4, contentP, authorP);
+        $(publishedDate).text(response[i].publishDate);
+        $(newDiv).append(titleH4, contentP, authorP, publishedDate);
         $(newDiv).addClass("blog-entry justify-content-center");
         $(newDiv).attr('id', response[i].id);
         $("#blogs-wrap").append(newDiv);
@@ -139,6 +141,7 @@ $("#button-search").on("click", function(evenet){
 
       if(response.length != 0){
         $("#blogs-wrap").empty();
+        console.log(response);
         restartMain(response);
       }
       else{
@@ -200,7 +203,7 @@ function restartMain(blogs){
     $(titleH4).text(blogs[i].title);
     $(contentP).text(blogs[i].content);
     $(authorP).text(blogs[i].author);
-    $(publishedDate).text(blog.publishDate);
+    $(publishedDate).text(blogs[i].publishDate);
     $(newDiv).append(titleH4, contentP, authorP, publishedDate);
     $(newDiv).addClass("blog-entry justify-content-center");
     $(newDiv).attr('id', blogs[i].id);
