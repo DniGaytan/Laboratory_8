@@ -1,7 +1,7 @@
 {
-  "name": "laboratory_7",
+  "name": "laboratory_8",
   "version": "1.0.0",
-  "description": "\"Web development blog node project (Laboratory 7)\"",
+  "description": "\"Web development blog node project (Laboratory 8)\"",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "bp": "^0.1.1-beta",
+    "config-js": "^1.1.13",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "morgan": "^1.9.1",
