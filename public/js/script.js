@@ -97,6 +97,7 @@ $("#button-update").on("click", function(event){
           title : title,
           content : content,
           author : author,
+          publishDate : "",
         }
         console.log(options[i].className);
         settings = {

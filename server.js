@@ -126,7 +126,7 @@ app.put('/blog-posts/:id', jsonP, function(req, res){
               req.body.author = currentBlog[0].author;
             }
             if(req.body.publishDate == ""){
-              req.body.author = currentBlog[0].publishDate;
+              req.body.publishDate = currentBlog[0].publishDate;
             }
 
             console.log(req.body);
