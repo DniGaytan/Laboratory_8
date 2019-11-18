@@ -22,8 +22,8 @@
       <div class="row justify-content-center">
         <button type="button" class="btn btn-primary col-1" data-toggle="modal" data-target="#wrap-post" style="margin-right: 30px;">Post a blog</button>
         <button type="button" class="btn btn-warning col-1" data-toggle="modal" data-target="#wrap-delete" style="margin-right: 30px;">Delete a blog </button>
-        <button type="button" class="btn btn-success col-1" data-toggle="modal" data-target="#wrap-update">Update a blog </button>
-        <button type="button" class="btn btn-success col-1" data-toggle="modal" data-target="#wrap-search">Search by author </button>
+        <button type="button" class="btn btn-success col-1" data-toggle="modal" data-target="#wrap-update" style="margin-right: 30px;">Update a blog </button>
+        <button type="button" class="btn btn-info col-1" data-toggle="modal" data-target="#wrap-search">Search by author </button>
       </div>
 
     </div>
@@ -112,11 +112,11 @@
           <div class="modal-body" id="form-parent">
             <form class="">
               <div class="form-group">
-
-                <select class="form-control form-control-sm" style="margin-bottom : 30px;" id="search-select">
-                </select>
-
-              <button type="button" class="btn btn-primary" id="button-update">Search</button>
+                <div class="form-group">
+                  <label>Author:</label>
+                  <input type="text" class="form-control" id="search-title" placeholder="Author's name">
+                </div>
+              <button type="button" class="btn btn-primary" id="button-search">Search</button>
             </form>
           </div>
         </div>

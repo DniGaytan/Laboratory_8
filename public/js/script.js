@@ -117,6 +117,41 @@ $("#button-update").on("click", function(event){
     }
 });
 
+$("#button-search").on("click", function(evenet){
+  var authorName = $("#search-title").val();
+
+
+  var authorData = {
+    author : authorName,
+  };
+
+  console.log(authorData);
+
+  settings = {
+    url : url + "/" + authorName,
+    method : 'POST',
+    data : JSON.stringify(authorData),
+    dataType : 'JSON',
+    contentType : "application/json",
+    success : function(response){
+
+      if(response.length != 0){
+        $("#blogs-wrap").empty();
+        restartMain(response);
+      }
+      else{
+        $("#blogs-wrap").empty();
+      }
+
+    },
+    error : function(errorResponse){
+      console.log("error");
+    }
+  }
+
+  $.ajax(settings);
+})
+
 function updateBlogs(blog){
   console.log(blog.title);
     var opt = document.createElement("option");
@@ -134,7 +169,6 @@ function updateBlogs(blog){
 function restartBlogs(blogs){
   $("#delete-select").empty();
   $("#update-select").empty();
-  console.log(blogs[0].title);
   for(var i = 0; i < blogs.length; i++){
     var opt = document.createElement("option");
     $(opt).text(blogs[i].title);

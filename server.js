@@ -30,17 +30,17 @@ app.get('/blog-posts', function(req, res){
   });
 });
 
-app.get('/blog-posts/:author', function(req, res){
+app.post('/blog-posts/:author', jsonP, function(req, res){
   if(req.params.author = ''){
     res.statusMessage = "Author must be present in the query.";
+    console.log("this was triggered")
 
     return res.status(406).json({
       code: 406,
       message: res.StatusMessage,
     });
   }
-
-  blogFunctionalities.getByAuthor(req.params.author)
+  blogFunctionalities.getByAuthor(req.body)
   .then( (posts) => {
     return res.status(200).json(posts);
   })
