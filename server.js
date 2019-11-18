@@ -40,7 +40,16 @@ app.post('/blog-posts/:author', jsonP, function(req, res){
       message: res.StatusMessage,
     });
   }
-  blogFunctionalities.getByAuthor(req.body)
+
+  var newPost = {
+      id : uuid.v4(),
+      title : req.body.title,
+      content: req.body.content,
+      author: req.body.author,
+      publishDate: Date.now(),
+    }
+
+  blogFunctionalities.getByAuthor(newPost)
   .then( (posts) => {
     return res.status(200).json(posts);
   })
