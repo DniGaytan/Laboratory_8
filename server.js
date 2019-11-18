@@ -74,7 +74,7 @@ app.post('/blog-posts', jsonP, function(req, res, next){
       publishDate: Date.now(),
     }
 
-    blogHandler.post(newPost)
+    blogFunctionalities.post(newPost)
     .then( (post) => {
       return res.status(201).json(post);
     })
@@ -94,7 +94,7 @@ app.delete('/blog-posts/:id', function(req, res){
     return res.status(406);
   }
 
-  blogHandler.delete(req.params.id)
+  blogFunctionalities.delete(req.params.id)
   .then((post) => {
     return res.status(200);
   })
@@ -110,7 +110,7 @@ app.delete('/blog-posts/:id', function(req, res){
 app.put('/blog-posts/:id', jsonP, function(req, res){
   if(req.body.id != ''){
     if (req.params.id == req.body.id) {
-          blogHandler.put(req.body)
+          blogFunctionalities.put(req.body)
           .then((post) => {
             return res.status(202).json(post);
           })
