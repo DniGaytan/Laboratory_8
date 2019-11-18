@@ -23,6 +23,7 @@
         <button type="button" class="btn btn-primary col-1" data-toggle="modal" data-target="#wrap-post" style="margin-right: 30px;">Post a blog</button>
         <button type="button" class="btn btn-warning col-1" data-toggle="modal" data-target="#wrap-delete" style="margin-right: 30px;">Delete a blog </button>
         <button type="button" class="btn btn-success col-1" data-toggle="modal" data-target="#wrap-update">Update a blog </button>
+        <button type="button" class="btn btn-success col-1" data-toggle="modal" data-target="#wrap-search">Search by author </button>
       </div>
 
     </div>
@@ -101,6 +102,27 @@
         </div>
       </div>
     </div>
+
+    <div class="modal fade" id="wrap-search" role="dialog" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title">Search by author</h3>
+          </div>
+          <div class="modal-body" id="form-parent">
+            <form class="">
+              <div class="form-group">
+
+                <select class="form-control form-control-sm" style="margin-bottom : 30px;" id="search-select">
+                </select>
+
+              <button type="button" class="btn btn-primary" id="button-update">Search</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script type="text/javascript" src="./js/script.js"></script>
   </body>
