@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Laboratory 7</title>
+  </head>
+
+  <link rel="stylesheet" href="./css/master.css">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <body>
+
+    <div class="jumbotron" id = "main-wrap">
+
+      <div id="blogs-wrap" class="row justify-content-around">
+
+      </div>
+
+      <div class="row justify-content-center">
+        <button type="button" class="btn btn-primary col-1" data-toggle="modal" data-target="#wrap-post" style="margin-right: 30px;">Post a blog</button>
+        <button type="button" class="btn btn-warning col-1" data-toggle="modal" data-target="#wrap-delete" style="margin-right: 30px;">Delete a blog </button>
+        <button type="button" class="btn btn-success col-1" data-toggle="modal" data-target="#wrap-update">Update a blog </button>
+      </div>
+
+    </div>
+
+    <div class="modal fade" id="wrap-post" role="dialog" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title">New entry!</h3>
+          </div>
+          <div class="modal-body" id="form-parent">
+            <form class="">
+              <div class="form-group">
+                <label>Title:</label>
+                <input type="text" class="form-control" id="blog-title" placeholder="Blog's title" value="">
+              </div>
+              <div class="form-group">
+                <label>Content:</label>
+                <input type="text" class="form-control" id="blog-content" placeholder="Blog's content" value="">
+              </div>
+              <div class="form-group">
+                <label>Author:</label>
+                <input type="text" class="form-control" id="blog-author" placeholder="Blog's author" value="">
+              </div>
+              <button type="button" class="btn btn-primary" id="button-post">Post!</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="wrap-delete" role="dialog" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title">Delete entry</h3>
+          </div>
+          <div class="modal-body" id="form-parent">
+            <form class="">
+              <select class="form-control form-control-sm" id="delete-select">
+              </select>
+              <button type="button" class="btn btn-danger" style="margin-top:30px;" id="button-delete">Delete</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="wrap-update" role="dialog" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title">Update blog</h3>
+          </div>
+          <div class="modal-body" id="form-parent">
+            <form class="">
+              <div class="form-group">
+
+                <select class="form-control form-control-sm" style="margin-bottom : 30px;" id="update-select">
+                </select>
+
+                <label>Title:</label>
+                <input type="text" class="form-control" id="update-title" placeholder="Blog's title">
+              </div>
+              <div class="form-group">
+                <label>Content:</label>
+                <input type="text" class="form-control" id="update-content" placeholder="Blog's content">
+              </div>
+              <div class="form-group">
+                <label>Author:</label>
+                <input type="text" class="form-control" id="update-author" placeholder="Blog's author">
+              </div>
+              <button type="button" class="btn btn-primary" id="button-update">Update</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" src="./js/script.js"></script>
+  </body>
+</html>

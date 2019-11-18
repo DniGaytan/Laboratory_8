@@ -1,0 +1,19 @@
+{
+  "name": "laboratory_7",
+  "version": "1.0.0",
+  "description": "\"Web development blog node project (Laboratory 7)\"",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "\"Daniel Gaytan\"",
+  "license": "ISC",
+  "dependencies": {
+    "bp": "^0.1.1-beta",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "morgan": "^1.9.1",
+    "server": "^1.0.19",
+    "uuid": "^3.3.3"
+  }
+}
