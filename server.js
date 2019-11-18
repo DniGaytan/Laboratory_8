@@ -1,10 +1,14 @@
 let express = require('express');
+let mongoose = require('mongoose');
+let {blogFunctionalities} = require('./blog-post-model');
 let parser = require('body-parser');
 let jsonP = parser.json();
 let morgan = require('morgan');
 let uuid = require('uuid');
 let cors = require('cors');
 let app = express();
+
+let {DATABASE_URL, PORT} = require('./config');
 
 app.use(express.static('public'));
 app.use( morgan( 'dev' ) );
@@ -26,11 +30,28 @@ var existingPosts = [
   }
 ] //Before the server starts running, there is just [2] posts.
 
+/*
 app.get('/blog-posts', function(req, res){
   console.log("/blog-posts get was triggered");
   return res.status(200).json(existingPosts);
 });
+*/
 
+app.get('/blog-posts', function(req, res){
+  blogFunctionalities.get()
+  .then( (posts) => {
+    return res.status(200).json(posts);
+  })
+  .catch( (e) => {
+    res.statusMessage = "Cannot connect properly with the DB";
+    return res.status(500).json({
+      status : 500,
+      message : res.statusMessage,
+    });
+  });
+});
+
+/*
 app.get('/blog-posts/:author', function(req, res){
   console.log("/blog-posts:author get was triggered");
 
@@ -53,7 +74,32 @@ app.get('/blog-posts/:author', function(req, res){
   res.statusMessage = "Author does not exist";
   return res.status(404);
 });
+*/
 
+app.get('/blog-posts/:author', function(req, res){
+  if(req.params.author = ''){
+    res.statusMessage = "Author must be present in the query.";
+
+    return res.status(406).json({
+      code: 406,
+      message: res.StatusMessage,
+    });
+  }
+
+  blogFunctionalities.getByAuthor(req.params.author)
+  .then( (posts) => {
+    return res.status(200).json(posts);
+  })
+  .catch( (e) => {
+    res.statusMessage = "Cannot connect properly with the DB";
+    return res.status(500).json({
+      status : 500,
+      message : res.statusMessage,
+    });
+  });
+});
+
+/*
 app.post('/blog-posts', jsonP, function(req, res, next){
 
   var anyBlank = false;
@@ -83,7 +129,45 @@ app.post('/blog-posts', jsonP, function(req, res, next){
   res.statusMessage = "some fields are missing";
   return res.status(406);
 });
+*/
 
+app.post('/blog-posts', jsonP, function(req, res, next){
+  var anyBlank = false;
+
+  if(req.body.title == ""){
+    anyBlank = true;
+  }
+  if(req.body.content == ""){
+    anyBlank = true;
+  }
+  if(req.body.author == ""){
+    anyBlank = true;
+  }
+  if(!anyBlank){
+    var newPost = {
+      id : uuid.v4(),
+      title : req.body.title,
+      content: req.body.content,
+      author: req.body.author,
+      publishDate: Date.now(),
+    }
+
+    blogHandler.post(newPost)
+    .then( (post) => {
+      return res.status(201).json(post);
+    })
+    .catch( (e) => {
+      res.statusMessage = "Cannot connect properly with the DB";
+      return res.status(500).json({
+        status : 500,
+        message : res.statusMessage,
+      });
+    });
+  }
+});
+
+
+/*
 app.delete('/blog-posts/:id', function(req, res){
   if(req.params.id == ''){
     res.statusMessage('Id must be present in the query');
@@ -102,7 +186,29 @@ app.delete('/blog-posts/:id', function(req, res){
 
   return res.status(200);
 });
+*/
 
+app.delete('/blog-posts/:id', function(req, res){
+  if(req.params.id == ''){
+    res.statusMessage('Id must be present in the query');
+    return res.status(406);
+  }
+
+  blogHandler.delete(req.params.id)
+  .then((post) => {
+    return res.status(200);
+  })
+  .catch( (e) => {
+    res.statusMessage = "Cannot connect properly with the DB";
+    return res.status(500).json({
+      status : 500,
+      message : res.statusMessage,
+    });
+  });
+});
+
+
+/*
 app.put('/blog-posts/:id', jsonP, function(req, res){
   if(req.body.id != ''){
     if (req.params.id == req.body.id) {
@@ -133,7 +239,57 @@ app.put('/blog-posts/:id', jsonP, function(req, res){
     return res.status(406);
   }
 });
+*/
 
-app.listen('8000', () => {
-  console.log("server is running");
+app.put('/blog-posts/:id', jsonP, function(req, res){
+  if(req.body.id != ''){
+    if (req.params.id == req.body.id) {
+          blogHandler.put(req.body)
+          .then((post) => {
+            return res.status(202).json(post);
+          })
+          .catch( (e) => {
+            res.statusMessage = "Cannot connect properly with the DB";
+            return res.status(500).json({
+              status : 500,
+              message : res.statusMessage,
+            });
+          });
+    }
+    else{
+      res.statusMessage('Id does not match');
+      return res.status(409);
+    }
+
+  }
+  else{
+    res.statusMessage('Id must be present in the query');
+    return res.status(406);
+  }
+
 });
+
+
+function closeServer(){
+     return mongoose.disconnect()
+      	 .then(() => {
+        		 return new Promise((resolve, reject) => {
+          			 console.log('Closing the server');
+          			 server.close( err => {
+          				 if (err){
+          				 	     return reject(err);
+          				 }
+          				 else{
+          				 	     resolve();
+          				 }
+          			 });
+      		 });
+    	 });
+}
+
+runServer( PORT, DATABASE_URL )
+	.catch( (e) => {
+		console.log( e );
+	});
+
+module.exports = { app, runServer, closeServer };

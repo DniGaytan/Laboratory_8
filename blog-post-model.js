@@ -1,4 +1,5 @@
 let mongoose = require('mongoose')
+let uuid = require('uuid/v4');
 
 var blogSchema = mongoose.Schema(
   {
@@ -39,8 +40,8 @@ var blogFunctionalities = {
     return blogHandler.findOneAndUpdate({id : blogToUpdate.id}, blogToUpdate).then((post) => {return post}).catch((e) => {throw Error(e)});
   },
 
-  delete : (blogToDelete) => {
-    return blogHandler.findOneAndRemove({id : blogToDelete.id}).then((post) => {return post}).catch((e) => { throw Error(e)});
+  delete : (id) => {
+    return blogHandler.findOneAndRemove({id : id}).then((post) => {return post}).catch((e) => { throw Error(e)});
   }
 };
 
