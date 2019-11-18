@@ -36,7 +36,7 @@ $("#button-post").on("click", function(event){
     var newPost = {
       title : $("#blog-title").val(),
       content : $("#blog-content").val(),
-      author : $("#blos-author").val(),
+      author : $("#blog-author").val(),
     }
 
     console.log($("#blog-title").val());

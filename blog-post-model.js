@@ -31,7 +31,7 @@ var blogFunctionalities = {
   },
 
   getByAuthor : (authorName) => {
-    return blogHandler.find({author: authorName}).then((post) => {return post}).catch((e) => {throw Error(e)});
+    return blogHandler.find({author : authorName}).then((post) => {return post}).catch((e) => {throw Error(e)});
   },
 
   post : (blogEntry) => {
