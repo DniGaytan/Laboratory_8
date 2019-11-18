@@ -39,8 +39,6 @@ $("#button-post").on("click", function(event){
       author : $("#blog-author").val(),
     }
 
-    console.log($("#blog-title").val());
-
     settings = {
       url : url,
       method : 'POST',
